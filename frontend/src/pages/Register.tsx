@@ -19,14 +19,15 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Rejestracja</h2>
+    <div className="auth-container">
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Nazwa użytkownika" onChange={(e) => setUsername(e.target.value)} required />
+        <input type="text" placeholder="Full name" onChange={(e) => setFullName(e.target.value)} required />
+        <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
         <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Hasło" onChange={(e) => setPassword(e.target.value)} required />
-        <input type="text" placeholder="Imię i nazwisko" onChange={(e) => setFullName(e.target.value)} required />
-        <button type="submit">Zarejestruj</button>
+        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+        
+        <button type="submit">Register</button>
       </form>
     </div>
   );

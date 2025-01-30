@@ -62,15 +62,20 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = await User.findOne({ username });
-        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "")
+        const { email, password } = req.body;
 
-        if (!user || !isPasswordCorrect) {
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
+        }
+
+        const user = await User.findOne({ email });
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
+
+        if (!isPasswordCorrect) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        generateTokenAndSetCookie(user._id, res);
+        const token = generateTokenAndSetCookie(user._id, res);
 
         res.status(200).json({
             _id: user._id,
@@ -81,7 +86,8 @@ export const login = async (req, res) => {
             following: user.following,
             profilePicture: user.profilePicture,
             coverImage: user.coverImage,
-            bio: user.bio
+            bio: user.bio,
+            token,
         });
 
     } catch (error) {

@@ -1,0 +1,27 @@
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: var(--background-color);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .auth-container h2 {
+    text-align: center;
+  }
+  
+  .auth-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-container input {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .auth-container button {
+    width: 100%;
+  }
+  

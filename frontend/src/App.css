@@ -1,32 +1,3 @@
-.app-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px;
-  background: var(--background-color);
-  border-radius: 10px;
-  box-shadow: var(--box-shadow);
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--background-color);
-  color: var(--text-color);
-  padding: 15px;
-  border-radius: 10px 10px 0 0;
-}
-
-.navbar a {
-  color: var(--text-color);
-  font-weight: bold;
-  margin: 0 10px;
-}
-
-.navbar a:hover {
-  text-decoration: underline;
-}
-
 .card {
   background: var(--background-color);
   padding: 15px;

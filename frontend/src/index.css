@@ -26,6 +26,21 @@ body {
   line-height: 1.6;
 }
 
+.app-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
 a {
   text-decoration: none;
   color: var(--primary-color);

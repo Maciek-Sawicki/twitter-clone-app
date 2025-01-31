@@ -3,29 +3,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
 import { logout } from "../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import "../styles/navbar.css";
 
 const Navbar = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.auth);
 
   const handleLogout = async () => {
     await dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
 
   return (
     <nav className="navbar">
-      <Link to="/home">Home</Link>
-      {user ? (
-        <>
-          <span>👤 {user.username}</span>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      ) : (
+      <Link to="/">Home</Link>
+      {!user ? (
         <>
           <Link to="/login">Log in</Link>
           <Link to="/register">Register</Link>
+        </>
+      ) : (
+        <>
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/profile">Profile</Link>
+          <span>👤 {user.username}</span>
+          <button onClick={handleLogout}>Logout</button>
         </>
       )}
     </nav>

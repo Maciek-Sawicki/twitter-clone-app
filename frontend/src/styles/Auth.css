@@ -5,23 +5,32 @@
     background: var(--background-color);
     border-radius: 10px;
     box-shadow: var(--box-shadow);
-  }
+}
   
-  .auth-container h2 {
+.auth-container h2 {
     text-align: center;
-  }
-  
-  .auth-container form {
+}
+
+.auth-container form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .auth-container input {
+}
+
+.auth-container input {
     padding: 10px;
     margin-bottom: 10px;
-  }
-  
-  .auth-container button {
+}
+
+.auth-container button {
     width: 100%;
-  }
+}
+
+.auth-container p {
+    margin: 10px;
+    text-align: center;
+}
+
+.navigate-container {
+    margin-top: 80px;
+}
   

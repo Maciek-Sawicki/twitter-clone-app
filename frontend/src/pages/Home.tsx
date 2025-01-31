@@ -30,18 +30,3 @@ const Home = () => {
 };
 
 export default Home;
-
-//     return (
-//         <div>
-//           <h1>Strona główna</h1>
-//           {safePosts.length === 0 ? <p>Brak postów</p> : safePosts.map((post) => (
-//             <div key={post._id} className="card">
-//               <h3>@{post.postedBy.username}</h3>
-//               <p>{post.text}</p>
-//               <p>❤️ {post.likes.length}</p>
-//               <p>💬 {post.comments.length} komentarzy</p>
-//             </div>
-//           ))}
-//         </div>
-//       );
-//     };

@@ -1,107 +1,109 @@
 .post {
-    background: var(--background-color);
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: var(--box-shadow);
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    transition: 0.3s;
-  }
+  background: var(--background-color);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  transition: 0.3s;
+}
   
-  .post:hover {
-    background: var(--background-color-light);
-  }
-  
-  .post-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-  }
-  
-  .post-text {
-    font-size: 16px;
-    margin-bottom: 10px;
-    text-align: left;
-  }
-  
-  .post-actions {
-    display: flex;
-    margin-top: 10px;
-  }
-  
-  .liked {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .comment-section {
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-  }
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 
-  .comment-add {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .comment-add textarea {
-    width: 100%;
-    min-height: 40px;
-    max-height: 120px;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    resize: vertical; /* Pozwala użytkownikowi zmieniać wysokość */
-  }
-  
-  .comment-add button {
-    background: #007bff;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    white-space: nowrap; /* Zapobiega rozciąganiu przycisku */
-    flex-shrink: 0; /* Zapobiega rozciąganiu we flexboxie */
-  }
-  
-  .comment-add button:hover {
-    background: #0056b3;
-  }
-  
-  .comment-section input {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 5px;
-  }
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.post-text {
+  font-size: 24px;
+  margin: 20px 0 40px;
+  text-align: left;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.comment-btn:disabled {
+  background-color: transparent;
+  border: none;
+  cursor: default;
+  color: var(--text-color);
+}
+
+.comment-btn:disabled:hover {
+  color: var(--text-color);
+}
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  border-top: 1px solid var(--text-color);
+  padding-top: 10px;
+}
+
+.comment-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.comment-add textarea {
+  width: 100%;
+  min-height: 40px;
+  max-height: 120px;
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--text-color);
+  border: none;
+  resize: none; 
+  background-color: var(--background-color);
+}
+
+.comment-add button {
+  white-space: nowrap; 
+  flex-shrink: 0; 
+}
+
+.comment-section input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+
+.comment-add-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
 
 
-  .comments {
-    margin-top: 10px;
-    text-align: left;
-  }
-  
-  .comments p {
-    font-size: 14px;
-    color: #333;
-    padding: 5px 0;
-    border-bottom: 1px solid #eee;
-  }
-  
+.comments {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.comments p {
+  font-size: 16px;
+  color: var(--text-color);
+  padding: 5px 0;
+  word-break: break-all;
+  white-space: normal;
+}

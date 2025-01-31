@@ -1,18 +1,16 @@
-import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPosts, fetchFollowingPosts, createPost, likePost, commentPost } from "../store/slices/postSlice";
+import { fetchAllPosts, fetchFollowingPosts, createPost} from "../store/slices/postSlice";
 import { AppDispatch, RootState } from "../store/store";
 import Post from "../components/Post";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
   const { posts, followingPosts, loading, error } = useSelector((state: RootState) => state.posts);
   const [tab, setTab] = useState<"all" | "following">("all");
   const [newPost, setNewPost] = useState("");
-  const [comment, setComment] = useState("");
+  const { user } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     dispatch(fetchAllPosts());
@@ -29,36 +27,33 @@ const Dashboard = () => {
   
   return (
     <div className="dashboard-container">
-      <h1>Dashboard</h1>
-  
-      {/* 🔥 Zakładki do przełączania między "Wszystkie" i "Obserwowani" */}
+      <h1>Hello {user?.username}!</h1>
       <div className="tabs">
         <button className={tab === "all" ? "active" : ""} onClick={() => setTab("all")}>
-          Wszystkie posty
+          All Posts
         </button>
         <button className={tab === "following" ? "active" : ""} onClick={() => setTab("following")}>
-          Obserwowani
+          Following
         </button>
       </div>
-  
-      {/* 🔥 Formularz do dodawania nowego postu */}
       <div className="create-post">
-        <input
-          type="text"
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
-          placeholder="Co masz na myśli?"
+        <textarea
+            value={newPost}
+            onChange={(e) => setNewPost(e.target.value)}
+            placeholder="Whats on your mind?"
+            rows={4}
+            wrap="hard"
         />
-        <button onClick={handleCreatePost} disabled={loading}>Dodaj post</button>
+        <div className="button-container">
+          <button onClick={handleCreatePost} disabled={loading}>Post</button>
+        </div>
       </div>
-  
-      {/* 🔥 Wyświetlanie postów */}
       {loading ? (
-        <p>Ładowanie...</p>
+        <p>Loading...</p>
       ) : error ? (
         <p style={{ color: "red" }}>{error}</p>
       ) : displayedPosts.length === 0 ? (
-        <p>Brak postów.</p>
+        <p>No posts to show</p>
       ) : (
         displayedPosts.map((post, index) => (
           <Post key={`${post._id}-${index}`} post={post} />

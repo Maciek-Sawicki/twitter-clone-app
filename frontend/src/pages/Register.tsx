@@ -96,6 +96,10 @@ const Register = () => {
           {loading ? "Registering..." : "Register"}
         </button>
       </form>
+      <div className="navigate-container">
+        <p>Already have an account?</p>
+        <button onClick={() => navigate("/login")}>Login</button>  
+      </div> 
     </div>
   );
 };

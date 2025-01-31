@@ -40,15 +40,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-
-// export const registerUser = createAsyncThunk('auth/registerUser', async ({ username, email, password, fullName }: { username: string; email: string; password: string; fullName: string }, { rejectWithValue }) => {
-//   try {
-//     await axios.post('/api/auth/signup', { username, email, password, fullName });
-//   } catch (error) {
-//     return rejectWithValue('Registration failed');
-//   }
-// });
-
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (
@@ -84,9 +75,9 @@ export const registerUser = createAsyncThunk(
 export const logout = createAsyncThunk("auth/logoutUser", async (_, { rejectWithValue }) => {
   try {
     await axios.post("/api/auth/logout", {}, { withCredentials: true });
-    return null;
+      return null;
   } catch (error: any) {
-    return rejectWithValue("Logout failed");
+      return rejectWithValue("Logout failed");
   }
 });
 
@@ -104,42 +95,42 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<{ user: User; token: string }>) => {
-        //console.log("Redux login success:", action.payload);
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        localStorage.setItem("token", action.payload.token);
-      })
-      .addCase(fetchUser.fulfilled, (state, action: PayloadAction<User>) => {
-        //console.log("Redux fetchUser success:", action.payload);
-        state.user = action.payload;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.error = action.payload as string;
-      })
-      .addCase(fetchUser.rejected, (state, action) => {
-        state.error = action.payload as string;
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null;
-        state.token = null;
-        localStorage.removeItem("token");
-      })
-      .addCase(registerUser.pending, (state) => {
-        state.loading = true;
-        state.error = null; 
-        state.successMessage = null; 
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.successMessage = action.payload as string;
-        state.error = null;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-        state.successMessage = null; 
-      });
+    .addCase(loginUser.fulfilled, (state, action: PayloadAction<{ user: User; token: string }>) => {
+      //console.log("Redux login success:", action.payload);
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      localStorage.setItem("token", action.payload.token);
+    })
+    .addCase(fetchUser.fulfilled, (state, action: PayloadAction<User>) => {
+      //console.log("Redux fetchUser success:", action.payload);
+      state.user = action.payload;
+    })
+    .addCase(loginUser.rejected, (state, action) => {
+      state.error = action.payload as string;
+    })
+    .addCase(fetchUser.rejected, (state, action) => {
+      state.error = action.payload as string;
+    })
+    .addCase(logout.fulfilled, (state) => {
+      state.user = null;
+      state.token = null;
+      localStorage.removeItem("token");
+    })
+    .addCase(registerUser.pending, (state) => {
+      state.loading = true;
+      state.error = null; 
+      state.successMessage = null; 
+    })
+    .addCase(registerUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.successMessage = action.payload as string;
+      state.error = null;
+    })
+    .addCase(registerUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload as string;
+      state.successMessage = null; 
+    });
   },
 });
 

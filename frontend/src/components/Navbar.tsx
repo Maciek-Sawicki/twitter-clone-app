@@ -27,8 +27,10 @@ const Navbar = () => {
         <>
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/profile">Profile</Link>
-          <span>👤 {user.username}</span>
-          <button onClick={handleLogout}>Logout</button>
+          <div className="user-info">
+            <span>@{user.username}</span>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
         </>
       )}
     </nav>

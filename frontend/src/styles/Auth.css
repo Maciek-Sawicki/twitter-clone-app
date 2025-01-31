@@ -1,36 +1,36 @@
 .auth-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background: var(--background-color);
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
 }
   
 .auth-container h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .auth-container form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .auth-container input {
-    padding: 10px;
-    margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .auth-container button {
-    width: 100%;
+  width: 100%;
 }
 
 .auth-container p {
-    margin: 10px;
-    text-align: center;
+  margin: 10px;
+  text-align: center;
 }
 
 .navigate-container {
-    margin-top: 80px;
+  margin-top: 80px;
 }
   

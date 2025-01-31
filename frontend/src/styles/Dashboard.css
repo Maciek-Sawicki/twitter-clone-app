@@ -1,49 +1,69 @@
 .dashboard-container {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-  }
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
   
-  .tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
+.tabs button {
+  padding: 10px 16px;
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  font-size: 16px;
+  background: transparent;
+  border-radius: 50px;
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.tabs button:hover {
+  background: var(--hover-bg);
+}
+
+.tabs button.active {
+  background: var(--primary-color); 
+  color: var(--text-color);
+}
+
+.tabs button:active {
+  transform: scale(0.95); 
+}
+.create-post {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.create-post textarea {
+  width: 100%;
+  min-height: 40px;
+  max-height: 120px;
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--text-color);
+  border: none;
+  resize: none; 
+  background-color: var(--background-color);
+  max-width: 600px; 
+}
+
+.create-post .button-container {
+  display: flex;
+  justify-content: flex-end; 
+  width: 100%; 
+  max-width: 600px; 
+}
   
-  .tabs button {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    background: lightgray;
-  }
-  
-  .tabs button.active {
-    background: #007bff;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .create-post {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .create-post input {
-    width: 70%;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 5px;
-  }
-  
-  .create-post button {
-    padding: 10px;
-    border: none;
-    background: #28a745;
-    color: white;
-    cursor: pointer;
-  }
   

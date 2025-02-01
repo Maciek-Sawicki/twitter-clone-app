@@ -5,6 +5,7 @@ import { RootState } from "../store";
 interface User {
   _id: string;
   username: string;
+  fullName: string;
   profilePicture?: string;
 }
 
@@ -135,6 +136,8 @@ const handleCreatePost = (state: PostState, action: PayloadAction<Post>) => {
 const handleLikePost = (state: PostState, action: PayloadAction<{ postId: string; userId: string }>) => {
   const { postId, userId } = action.payload;
   const post = state.posts.find((p) => p._id === postId);
+  const postFollowing = state.followingPosts.find((p) => p._id === postId);
+
   if (post) {
     if (post.likes.includes(userId)) {
       post.likes = post.likes.filter((id) => id !== userId); 
@@ -142,14 +145,26 @@ const handleLikePost = (state: PostState, action: PayloadAction<{ postId: string
       post.likes.push(userId);
     }
   }
+  if (postFollowing) {
+    if (postFollowing.likes.includes(userId)) {
+      postFollowing.likes = postFollowing.likes.filter((id) => id !== userId);
+    } else {
+      postFollowing.likes.push(userId);
+    }
+  }
 };
 
 const handleCommentPost = (state: PostState, action: PayloadAction<{ postId: string; comment: Comment }>) => {
   const { postId, comment } = action.payload;
-  const postIndex = state.posts.findIndex((p) => p._id === postId);
-
-  if (postIndex !== -1) {
-    state.posts[postIndex].comments = [...state.posts[postIndex].comments, comment]; 
+  // const postIndex = state.posts.findIndex((p) => p._id === postId);
+  const postIndex = state.posts.find((p) => p._id === postId);
+  const postFollowing = state.followingPosts.find((p) => p._id === postId);
+  if (postIndex) {
+    // state.posts[postIndex].comments = [...state.posts[postIndex].comments, comment]; 
+    postIndex.comments.push(comment);
+  }
+  if (postFollowing) {
+    postFollowing.comments.push(comment);
   }
 };
 

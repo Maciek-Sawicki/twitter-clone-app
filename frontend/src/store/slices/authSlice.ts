@@ -7,6 +7,7 @@ interface User {
   email: string;
   fullName: string;
   profilePicture?: string;
+  following: string[];
 }
 
 interface AuthState {

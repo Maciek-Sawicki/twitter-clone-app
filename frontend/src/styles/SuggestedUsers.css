@@ -1,0 +1,44 @@
+.suggested-users {
+  background: var(--background-color);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  max-width: 300px;
+}
+
+.suggested-users h3 {
+  font-size: 18px;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.suggested-users ul {
+  list-style: none;
+  padding: 0;
+}
+
+.suggested-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.suggested-user:last-child {
+  border-bottom: none;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}

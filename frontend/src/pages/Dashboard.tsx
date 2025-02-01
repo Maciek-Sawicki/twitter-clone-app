@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts, fetchFollowingPosts, createPost} from "../store/slices/postSlice";
 import { AppDispatch, RootState } from "../store/store";
+import SuggestedUsers from "../components/SuggestedUsers";
 import Post from "../components/Post";
 import "../styles/Dashboard.css";
 
@@ -26,6 +27,7 @@ const Dashboard = () => {
   };
   
   return (
+    <div className="dashboard">
     <div className="dashboard-container">
       <h1>Hello {user?.username}!</h1>
       <div className="tabs">
@@ -48,17 +50,28 @@ const Dashboard = () => {
           <button onClick={handleCreatePost} disabled={loading}>Post</button>
         </div>
       </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p style={{ color: "red" }}>{error}</p>
-      ) : displayedPosts.length === 0 ? (
-        <p>No posts to show</p>
-      ) : (
-        displayedPosts.map((post, index) => (
-          <Post key={`${post._id}-${index}`} post={post} />
-      )))}
+      </div>
+      <div className="posts-container">
+      <aside className="sidebar">
+
+        </aside>
+        <div className="posts">
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
+        ) : displayedPosts.length === 0 ? (
+          <p>No posts to show</p>
+        ) : (
+          displayedPosts.map((post, index) => (
+            <Post key={`${post._id}-${index}`} post={post} />
+        )))}
+      </div>
+      <aside className="sidebar">
+          <SuggestedUsers />
+        </aside>
     </div>
+  </div>
   );
   
 };

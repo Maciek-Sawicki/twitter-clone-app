@@ -25,7 +25,8 @@
 }
 
 .tabs button:hover {
-  background: var(--hover-bg);
+  background: var(--primary-color);
+  color: white;
 }
 
 .tabs button.active {
@@ -64,6 +65,24 @@
   justify-content: flex-end; 
   width: 100%; 
   max-width: 600px; 
+}
+
+.posts-container {
+  display: flex;
+  gap: 60px;
+  padding: 20px;
+  justify-content: center;
+}
+
+
+.dashboard-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.sidebar {
+  margin-top: 20px;
+  width: 30%;
 }
   
   

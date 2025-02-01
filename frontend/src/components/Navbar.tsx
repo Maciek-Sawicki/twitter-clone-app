@@ -17,7 +17,6 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <Link to="/">Home</Link>
       {!user ? (
         <>
           <Link to="/login">Log in</Link>
@@ -27,7 +26,8 @@ const Navbar = () => {
         <>
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/profile">Profile</Link>
-          <div className="user-info">
+          <Link to="/settings">Settings</Link>
+          <div className="nav-user-info">
             <span>@{user.username}</span>
             <button onClick={handleLogout}>Logout</button>
           </div>

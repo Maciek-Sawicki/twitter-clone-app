@@ -21,7 +21,6 @@ interface AuthState {
 export const fetchUser = createAsyncThunk("auth/fetchUser", async (_, { rejectWithValue }) => {
   try {
     const res = await axios.get("/api/auth/me", { withCredentials: true });
-    //console.log("Fetch User response:", res.data); 
     return res.data;
   } catch (error: any) {
     return rejectWithValue("User not found");

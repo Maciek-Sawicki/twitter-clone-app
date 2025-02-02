@@ -15,23 +15,21 @@ interface SuggestedUsersState {
   error: string | null;
 }
 
-// 🔥 Pobranie sugerowanych użytkowników
 export const fetchSuggestedUsers = createAsyncThunk("users/fetchSuggested", async (_, { rejectWithValue }) => {
   try {
     const res = await axios.get("/api/users/suggested", { withCredentials: true });
     return res.data; 
   } catch (error: any) {
-    return rejectWithValue("Nie udało się pobrać sugerowanych użytkowników");
+    return rejectWithValue("Unble to fetch suggested users");
   }
 });
 
-// 🔥 Śledzenie/Odśledzenie użytkownika
 export const toggleFollowUser = createAsyncThunk("users/toggleFollow", async (userId: string, { rejectWithValue }) => {
   try {
     await axios.post(`/api/users/follow/${userId}`, {}, { withCredentials: true });
-    return userId; // Zwracamy ID użytkownika, którego obserwowaliśmy/odobserwowaliśmy
+    return userId; 
   } catch (error: any) {
-    return rejectWithValue("Nie udało się zmienić statusu obserwowania");
+    return rejectWithValue("Unable to toggle follow user");
   }
 });
 

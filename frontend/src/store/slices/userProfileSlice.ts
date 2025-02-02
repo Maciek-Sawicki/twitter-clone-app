@@ -21,30 +21,22 @@ interface UserProfileState {
   error: string | null;
 }
 
-// 🔥 Pobranie profilu użytkownika
 export const fetchUserProfile = createAsyncThunk("user/fetchProfile", async (username: string, { rejectWithValue }) => {
   try {
-    console.log("🔄 Pobieranie profilu:", username);
     const res = await axios.get(`/api/users/profile/${username}`, { withCredentials: true });
-    console.log("✅ Odpowiedź z API:", res.data);
     return res.data;
   } catch (error: any) {
-    console.error("⛔ Błąd API:", error.response?.data);
-    return rejectWithValue("Nie udało się pobrać profilu użytkownika.");
+    return rejectWithValue("Unable to fetch user's profile.");
   }
 });
 
-// 🔥 Śledzenie/Odśledzenie użytkownika
 export const toggleFollowUser = createAsyncThunk("user/toggleFollow", async (userId: string, { getState, rejectWithValue }) => {
   try {
     await axios.post(`/api/users/follow/${userId}`, {}, { withCredentials: true });
-
-    // Pobierz aktualnego użytkownika
     const loggedInUserId = (getState() as RootState).auth.user?._id;
-
     return { userId, loggedInUserId };
   } catch (error: any) {
-    return rejectWithValue("Nie udało się zmienić statusu obserwowania.");
+    return rejectWithValue("Unable to toggle follow user.");
   }
 });
 
@@ -73,9 +65,7 @@ const userProfileSlice = createSlice({
       })
       .addCase(toggleFollowUser.fulfilled, (state, action) => {
         if (state.profile) {
-          const { userId, loggedInUserId } = action.payload;
-
-          // Jeśli użytkownik jest już w followers, usuń go, w przeciwnym razie dodaj
+          const { loggedInUserId } = action.payload;
           if (loggedInUserId && state.profile.followers.includes(loggedInUserId)) {
             state.profile.followers = state.profile.followers.filter(id => id !== loggedInUserId);
           } else {

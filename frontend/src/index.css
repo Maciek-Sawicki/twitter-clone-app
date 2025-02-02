@@ -20,8 +20,8 @@
   --box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
   --border-color: #3c78d0;
 }
-/* 
-:root {
+
+/* :root {
   --primary-color: #15202b;
   --secondary-color: #192734;
   --background-color: #0d1117;
@@ -57,8 +57,8 @@
 
   --box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 } */
-
-/* :root {
+/* 
+:root {
   --primary-color: #1a1a1a;
   --secondary-color: #222831;
   --background-color: #121212;

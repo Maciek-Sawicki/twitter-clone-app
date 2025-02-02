@@ -33,7 +33,7 @@ const Post = ({ post }: PostProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.auth);
-  const isLiked = post.likes.includes(user?._id || "");
+  const isLiked: boolean = post.likes.includes(user?._id || "");
   const isOwner = user?._id === post.postedBy._id;
   const [commentText, setCommentText] = useState<{ [key: string]: string }>({});
 

@@ -31,6 +31,11 @@ const App = () => {
     }
   }, [dispatch, token, location.pathname]);
 
+  // useEffect(() => {
+  //   dispatch(fetchUser());
+  // }, [dispatch, token]); 
+  
+
   if (loading) return null;
 
   return (

@@ -120,6 +120,19 @@ export const commentPost = createAsyncThunk(
     }
 );
 
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (postId: string, { rejectWithValue }) => {
+    try {
+      await axios.delete(`/api/posts/${postId}`, { withCredentials: true });
+      return postId;
+    } catch (error: any) {
+      return rejectWithValue("Unable to delete post.");
+    }
+  }
+);
+
+
 const handlePending = (state: PostState) => {
   state.loading = true;
   state.error = null;
@@ -200,6 +213,12 @@ const handleCommentPost = (state: PostState, action: PayloadAction<{ postId: str
   }
 };
 
+const handleDeletePost = (state: PostState, action: PayloadAction<string>) => {
+  state.posts = state.posts.filter((post) => post._id !== action.payload);
+  state.userPosts = state.userPosts.filter((post) => post._id !== action.payload);
+  state.followingPosts = state.followingPosts.filter((post) => post._id !== action.payload);
+};
+
 const postSlice = createSlice({
   name: "posts",
   initialState,
@@ -220,7 +239,9 @@ const postSlice = createSlice({
 
       .addCase(createPost.fulfilled, handleCreatePost)
       .addCase(likePost.fulfilled, handleLikePost)
-      .addCase(commentPost.fulfilled, handleCommentPost);
+      .addCase(commentPost.fulfilled, handleCommentPost)
+
+      .addCase(deletePost.fulfilled, handleDeletePost);
   },
 });
 

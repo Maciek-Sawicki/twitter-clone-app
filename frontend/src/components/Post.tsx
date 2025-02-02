@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { likePost, commentPost } from "../store/slices/postSlice";
+import { likePost, commentPost, deletePost } from "../store/slices/postSlice";
 import { AppDispatch, RootState } from "../store/store";
 import { useNavigate } from "react-router-dom";
 import defaultAvatar from "../assets/avatar.png";
@@ -34,6 +34,7 @@ const Post = ({ post }: PostProps) => {
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.auth);
   const isLiked = post.likes.includes(user?._id || "");
+  const isOwner = user?._id === post.postedBy._id;
   const [commentText, setCommentText] = useState<{ [key: string]: string }>({});
 
   const handleLikePost = () => {
@@ -60,6 +61,12 @@ const Post = ({ post }: PostProps) => {
     }
   };
 
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      dispatch(deletePost(post._id));
+    }
+  };
+
   const goToUserProfile = (username: string) => {
     if (user?.username === username) {
       navigate("/profile"); 
@@ -78,7 +85,14 @@ const Post = ({ post }: PostProps) => {
             <p>@{post.postedBy.username}</p>
           </div>
         </div>
+        <div className="date-section">
         <p>{new Date(post.createdAt).toLocaleString('pl-PL', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
+        {isOwner && (
+          <button onClick={handleDelete} className="delete-btn">
+            🗑️ Delete
+          </button>
+        )}
+        </div>
       </div>
       <p className="post-text">{post.text}</p>
       <div className="post-actions">

@@ -28,7 +28,7 @@ const SuggestedUsers = () => {
       <ul>
         {users.map((user) => (
           <li key={user._id} className="suggested-user">
-            <div className="user-info" onClick={() => navigate(`/profile/${user.username}`)}>
+            <div className="suggested-user-info" onClick={() => navigate(`/profile/${user.username}`)}>
               <img src={user.profilePicture || defaultAvatar} alt={user.username} className="profile-pic" />
               <div>
                 <strong>{user.fullName}</strong>

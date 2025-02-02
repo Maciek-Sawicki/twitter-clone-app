@@ -4,16 +4,20 @@ import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../store/store";
 import { fetchUserProfile, toggleFollowUser } from "../store/slices/userProfileSlice";
 import "../styles/UserProfile.css";
+import { fetchUserPosts } from "../store/slices/postSlice";
+import Post from "../components/Post";
 
 const UserProfile = () => {
   const { username } = useParams<{ username: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const { profile, loading, error } = useSelector((state: RootState) => state.userProfile);
   const { user } = useSelector((state: RootState) => state.auth); // Zalogowany użytkownik
+  const { userPosts, loading: postsLoading } = useSelector((state: RootState) => state.posts);
 
   useEffect(() => {
     if (username) {
       dispatch(fetchUserProfile(username));
+      dispatch(fetchUserPosts(username));
     }
   }, [dispatch, username]);
 
@@ -41,6 +45,16 @@ const UserProfile = () => {
         <button onClick={handleFollowToggle} className={isFollowing ? "unfollow-btn" : "follow-btn"}>
           {isFollowing ? "Obserwujesz" : "Obserwuj"}
         </button>
+      </div>
+      <div className="user-posts">
+        <h3>Posty użytkownika</h3>
+        {postsLoading ? (
+          <p>Ładowanie postów...</p>
+        ) : userPosts.length > 0 ? (
+          userPosts.map((post) => <Post key={post._id} post={post} />)
+        ) : (
+          <p>Brak postów</p>
+        )}
       </div>
     </div>
   );

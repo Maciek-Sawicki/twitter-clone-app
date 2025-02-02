@@ -26,6 +26,7 @@ interface Post {
 
 interface PostState {
   posts: Post[];
+  userPosts: Post[];
   followingPosts: Post[];
   loading: boolean;
   error: string | null;
@@ -33,6 +34,7 @@ interface PostState {
 
 const initialState: PostState = {
   posts: [],
+  userPosts: [],
   followingPosts: [],
   loading: false,
   error: null,
@@ -58,6 +60,18 @@ export const fetchFollowingPosts = createAsyncThunk<Post[], void, { rejectValue:
       return res.data;
     } catch (error: any) {
       return rejectWithValue("Unable to fetch following posts.");
+    }
+  }
+);
+
+export const fetchUserPosts = createAsyncThunk<Post[], string, { rejectValue: string }>(
+  "posts/fetchUserPosts",
+  async (username, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`/api/posts/user/${username}`, { withCredentials: true });
+      return res.data;
+    } catch (error: any) {
+      return rejectWithValue("Nie udało się pobrać postów użytkownika.");
     }
   }
 );
@@ -126,6 +140,11 @@ const handleFetchFollowingPosts = (state: PostState, action: PayloadAction<Post[
   state.followingPosts = action.payload;
 };
 
+const handleFetchUserPosts = (state: PostState, action: PayloadAction<Post[]>) => {
+  state.loading = false;
+  state.userPosts = action.payload;
+};
+
 const handleCreatePost = (state: PostState, action: PayloadAction<Post>) => {
   const isDuplicate = state.posts.some((p) => p._id === action.payload._id);
   if (!isDuplicate) {
@@ -137,6 +156,7 @@ const handleLikePost = (state: PostState, action: PayloadAction<{ postId: string
   const { postId, userId } = action.payload;
   const post = state.posts.find((p) => p._id === postId);
   const postFollowing = state.followingPosts.find((p) => p._id === postId);
+  const postUser = state.userPosts.find((p) => p._id === postId);
 
   if (post) {
     if (post.likes.includes(userId)) {
@@ -152,6 +172,14 @@ const handleLikePost = (state: PostState, action: PayloadAction<{ postId: string
       postFollowing.likes.push(userId);
     }
   }
+
+  if (postUser) {
+    if (postUser.likes.includes(userId)) {
+      postUser.likes = postUser.likes.filter((id) => id !== userId);
+    } else {
+      postUser.likes.push(userId);
+    }
+  }
 };
 
 const handleCommentPost = (state: PostState, action: PayloadAction<{ postId: string; comment: Comment }>) => {
@@ -159,12 +187,16 @@ const handleCommentPost = (state: PostState, action: PayloadAction<{ postId: str
   // const postIndex = state.posts.findIndex((p) => p._id === postId);
   const postIndex = state.posts.find((p) => p._id === postId);
   const postFollowing = state.followingPosts.find((p) => p._id === postId);
+  const postUser = state.userPosts.find((p) => p._id === postId);
   if (postIndex) {
     // state.posts[postIndex].comments = [...state.posts[postIndex].comments, comment]; 
     postIndex.comments.push(comment);
   }
   if (postFollowing) {
     postFollowing.comments.push(comment);
+  }
+  if (postUser) {
+    postUser.comments.push(comment);
   }
 };
 
@@ -181,6 +213,10 @@ const postSlice = createSlice({
       .addCase(fetchFollowingPosts.pending, handlePending)
       .addCase(fetchFollowingPosts.fulfilled, handleFetchFollowingPosts)
       .addCase(fetchFollowingPosts.rejected, handleRejected)
+
+      .addCase(fetchUserPosts.pending, handlePending)
+      .addCase(fetchUserPosts.fulfilled, handleFetchUserPosts)
+      .addCase(fetchUserPosts.rejected, handleRejected)
 
       .addCase(createPost.fulfilled, handleCreatePost)
       .addCase(likePost.fulfilled, handleLikePost)

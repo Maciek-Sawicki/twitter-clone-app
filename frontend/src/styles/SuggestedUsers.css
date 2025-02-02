@@ -29,7 +29,7 @@
   border-bottom: none;
 }
 
-.user-info {
+.suggested-user-info {
   display: flex;
   align-items: center;
   gap: 10px;
